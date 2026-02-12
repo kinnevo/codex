@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Page</title>
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.page-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-space {
+    width: 500px;
+    height: 500px;
+    border: 2px dashed #ccc;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.content {
+    text-align: center;
+}
+.title {
+    font-size: 24pt;
+    margin: 0;
+}
+.tagline {
+    font-size: 12pt;
+    margin: 10px 0;
+}
+.multiline {
+    margin: 10px 0;
+}
+.big-button {
+    width: 2000px;
+    height: 500px;
+    margin-top: 20px;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 48px;
+    cursor: pointer;
+    user-select: none;
+}
+.arrow-left {
+    left: 10px;
+}
+.arrow-right {
+    right: 10px;
+}
+</style>
+</head>
+<body>
+<div class="page-container">
+    <div class="logo-space"></div>
+    <div class="content">
+        <h1 class="title"></h1>
+        <h2 class="tagline"></h2>
+        <div class="multiline"></div>
+        <button class="big-button"></button>
+    </div>
+    <div class="arrow arrow-left">&#9664;</div>
+    <div class="arrow arrow-right">&#9654;</div>
+</div>
+<script>
+const pages = [
+    {
+        title: 'Page 1',
+        tagline: 'Tagline for page 1',
+        text: 'This is the first line of text.\nAnd here is the second line.',
+        button: 'Button 1'
+    },
+    {
+        title: 'Page 2',
+        tagline: 'Tagline for page 2',
+        text: 'Another page of information.\nMore lines follow.',
+        button: 'Button 2'
+    },
+    {
+        title: 'Page 3',
+        tagline: 'Tagline for page 3',
+        text: 'Final page content goes here.\nAdditional details can be added.',
+        button: 'Button 3'
+    }
+];
+let current = 0;
+function showPage(idx) {
+    const p = pages[idx];
+    document.querySelector('.title').textContent = p.title;
+    document.querySelector('.tagline').textContent = p.tagline;
+    document.querySelector(".multiline").innerHTML = p.text.replace(/\n/g, "<br>");
+    document.querySelector(".big-button").textContent = p.button;
+}
+function nextPage() {
+    current = (current + 1) % pages.length;
+    showPage(current);
+}
+function prevPage() {
+    current = (current - 1 + pages.length) % pages.length;
+    showPage(current);
+}
+document.querySelector('.arrow-right').addEventListener('click', nextPage);
+document.querySelector('.arrow-left').addEventListener('click', prevPage);
+showPage(current);
+</script>
+</body>
+</html>
